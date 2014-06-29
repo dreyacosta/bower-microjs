@@ -11,7 +11,7 @@ $ bower install micro.js
 ```
 
 ```html
-<script src="path/to/micro.js"></script>
+<script src="bower_components/micro.js/micro.min.js"></script>
 ```
 
 **Or via Browserify**:
@@ -23,12 +23,29 @@ $ npm install micro.js
 
 ```js
 // script.js
-var u = require('micro');
+var u = require('micro.js');
 ```
 
 ```shell
 # Compile browserify script.js
-$ browserify script.js -t coffeeify > browser.js
+$ browserify -t coffeeify -r micro.js script.js > browser.js
+```
+
+```js
+// Compile with Grunt and grunt-browserify
+browserify: {
+  dist: {
+    files: {
+      'browser.js': ['script.js']
+    },
+    options: {
+      require: ['micro.js'],
+      transform: ['coffeeify']
+    }
+  }
+}
+
+grunt.loadNpmTasks('grunt-browserify');
 ```
 
 ### DOM Ready
